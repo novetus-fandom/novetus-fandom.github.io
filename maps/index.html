@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://novetus-fandom.github.io/assets/icon.png">
+    <title>Novetus - Maps</title>
+    <style>
+        /* 1. Slow/Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #header a.active {
+            color: #CC0000; /* Red color for active tab */
+        }
+        
+        /* 2. Custom Retro Scrollbar (Webkit browsers) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Set a standard retro width */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F0F0; /* Light gray track */
+            border-left: 1px solid #C0C0C0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #A0A0A0; /* Gray thumb */
+            border: 1px solid #777777; /* Dark border for definition */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+        }
+        
+        /* Minimal Retro Aesthetic */
+        body {
+            /* 3. Background Image: New Roblox Stud Texture */
+            background-image: url('https://tr.rbxcdn.com/180DAY-7a08aac3c46b12a65380007ecc18c9f4/420/420/Decal/Webp/noFilter');
+            background-repeat: repeat; /* Allows the texture to tile/spread */
+            background-size: 50px 50px; /* Kept the smaller size for now */
+            background-position: center top; /* Initial position for parallax */
+            background-color: #50C878; /* Updated: Emerald Green base color */
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container - Responsive Width, Centered */
+        #container {
+            max-width: 970px; /* Max fixed width */
+            width: 95%; /* Fluid width for mobile responsiveness */
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        /* Header / Navigation Bar (Desktop Default) */
+        #header {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        /* New Logo Style */
+        .header-logo {
+            padding-right: 20px;
+        }
+
+        .header-logo img {
+            height: 30px; /* Adjust height for the logo */
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        /* Spacing for Navigation Links */
+        #header a:not(.header-logo) {
+            margin-right: 15px; /* Add space between links */
+            color: #777;
+            font-weight: bold;
+        }
+
+        /* Content Layout - UPDATED FOR SINGLE COLUMN MAP VIEW */
+        #content-area {
+            display: block; /* Removing grid for a single flow */
+        }
+        
+        /* Standard Content Box Style */
+        .content-box {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+        }
+
+        .box-header {
+            background-color: #DDDDDD;
+            border-bottom: 1px solid #AFAFAF;
+            padding: 5px 10px;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #555555;
+        }
+        
+        /* Fun Fact Box Specific Style - UPDATED */
+        #fun-fact-box {
+            background-color: #EFCC00; /* Requested yellow color */
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+            padding: 10px; /* Add padding directly to the box */
+            text-align: center; /* Center the text */
+        }
+        .fun-fact-text {
+            font-size: 10pt; /* Smaller text size */
+            font-weight: normal; /* Revert to normal weight */
+            color: #000000; /* Black text */
+            font-style: italic; /* The 'old font thing' (italic) */
+            margin: 0; /* Remove default paragraph margins */
+        }
+
+        /* Map Listings Grid - UPDATED TO CSS GRID for better 4-per-line control */
+        .games-grid {
+            display: grid; /* Use grid for explicit column control */
+            /* This property ensures 4 columns fit on wide screens, 
+               and drops to 3, 2, or 1 on smaller screens automatically. */
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); 
+            gap: 10px; /* Gap between grid items (both row and column) */
+            padding: 10px;
+        }
+
+        .game-thumb {
+            border: 1px solid #AFAFAF;
+            background-color: #F8F8F8;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+            
+            /* The width is now primarily controlled by the grid parent */
+            flex-shrink: 0; 
+        }
+
+        .game-image {
+            width: 150px; 
+            height: 90px;
+            margin-bottom: 5px;
+            border: 1px solid #999; 
+            overflow: hidden;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .game-title {
+            font-size: 9pt;
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-align: left; 
+            width: 100%;
+        }
+
+        .map-meta {
+             font-size: 8pt; 
+             color: #666;
+             line-height: 1.3;
+             text-align: left; 
+             width: 100%;
+        }
+
+        .download-button {
+            background-color: #00AA00;
+            color: #FFFFFF;
+            font-size: 9pt;
+            font-weight: bold;
+            padding: 4px 8px;
+            margin-top: 5px;
+            border: 1px solid #008800;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        
+        .download-button:hover {
+            background-color: #00BB00;
+        }
+        
+        .loading-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        /* Form Styles for Suggest a Map */
+        .form-group {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 10pt;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            min-width: 160px; /* Align labels */
+            margin-right: 10px;
+        }
+
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group input[type="file"] { /* Added input[type="file"] */
+            flex-grow: 1;
+            padding: 3px;
+            border: 1px solid #AFAFAF;
+            font-size: 10pt;
+            max-width: 300px; /* Constrain width on large screens */
+        }
+        
+        /* Footer with White Frame */
+        #footer {
+            background-color: #FFFFFF; /* White background */
+            border: 1px solid #AFAFAF; /* Frame border */
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            padding: 10px 0; /* Reduced vertical padding */
+            margin-top: 10px; /* Space above footer */
+        }
+
+        /* --- MOBILE RESPONSIVENESS FIXES --- */
+        @media (max-width: 600px) {
+            
+            /* Header Layout Fix: Allow wrapping and center content */
+            #header {
+                flex-wrap: wrap; 
+                justify-content: center; /* Center everything */
+                padding: 8px 5px; /* Adjust padding for tight screen */
+            }
+            
+            /* Force Logo/Header Link to take full width and center it */
+            .header-logo {
+                width: 100%; /* Take up a full line */
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 5px; /* Space before links start */
+            }
+            
+            .header-logo img {
+                 height: 40px; /* Slightly increase logo size for touch target */
+            }
+
+            /* Adjust navigation link spacing for the row below the logo */
+            #header a:not(.header-logo) {
+                margin: 0 5px; /* Reduce horizontal margin */
+                font-size: 9pt;
+            }
+            
+            /* Adjust padding on footer for mobile screens */
+            #footer {
+                padding: 10px 5px;
+            }
+            
+            /* Grid layout centers items automatically on mobile */
+
+            /* Mobile adjustments for form */
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group label {
+                min-width: auto;
+                margin-right: 0;
+                margin-bottom: 2px;
+            }
+
+            .form-group input[type="text"],
+            .form-group select,
+            .form-group input[type="file"] {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            #submit-suggestion {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <!-- HEADER / NAVIGATION --><div id="header">
+            <a href="https://novetus-fandom.github.io/home/" class="header-logo">
+                 <img src="https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png" alt="NOVETUS Logo">
+            </a>
+            <a href="https://novetus-fandom.github.io/home/">Home</a>
+            <a href="https://novetus-fandom.github.io/maps/" class="active">Maps</a>
+            <a href="https://bitl.itch.io/novetus">Client Download</a>
+            <a href="https://novetus-fandom.github.io/info/">Info</a>
+        </div>
+        
+        <!-- FUN FACT BOX - UPDATED --><div id="fun-fact-box">
+            <p id="fact-display" class="fun-fact-text">
+                Loading fun fact...
+            </p>
+        </div>
+
+        <!-- MAIN CONTENT AREA - Now a single flow for map listings --><div id="content-area">
+
+            <!-- MAP LISTINGS (Now the primary content) --><div id="map-listings-wrapper">
+
+                <!-- Popular Maps --><div id="popular-maps-pane" class="content-box">
+                    <div class="box-header">All Maps</div>
+                    <!-- HARDCODED MAP DATA - TOP 3 DOWNLOADS --><div class="games-grid" id="popular-maps-grid">
+                        <!-- 1. Furkan's Castle -->
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/Furkan's%20Castle.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/Furkan's%20Castle.png" alt="Furkan's Castle Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">Furkan's Castle</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@XxTHeUltimatePwnerxX</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2007M</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Nov 30, 2025</span></span>
+                            <div class="download-button" data-map-id="furkans_castle">Download .rbxl</div>
+                        </div>
+                        <!-- 2. The Pwned Chickened Pyramid -->
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/The%20Pwned%20Chickened%20Pyramid.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/The%20Pwned%20Chickened%20Pyramid.png" alt="The Pwned Chickened Pyramid Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">The Pwned Chickened Pyramid</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@TehPwnedChickened</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2007M</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Nov 30, 2025</span></span>
+                            <div class="download-button" data-map-id="pwned_chickened_pyramid">Download .rbxl</div>
+                        </div>
+                        <!-- 3. Grave Yard (Added for visual demonstration of 4-up layout) -->
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/Grave%20Yard.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/Grave%20Yard.png" alt="Grave Yard Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">Grave Yard</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@TehPwnedChickened</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2011E</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Nov 30, 2025</span></span>
+                            <div class="download-button" data-map-id="grave_yard">Download .rbxl</div>
+                        </div>
+
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/Pwned%20Room.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/Pwned%20Room.png" alt="Pwned Room Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">Pwned Room</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@TehPwnedChickened</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2011E</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Nov 30, 2025</span></span>
+                            <div class="download-button" data-map-id="grave_yard">Download .rbxl</div>
+                        </div>
+
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/Pirate%20Army%20HQ.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/Pirate%20Army%20HQ.png" alt="Pirate Army HQ Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">Pirate Army HQ</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@brickmason</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2007E</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Dec 1, 2025</span></span>
+                            <div class="download-button" data-map-id="grave_yard">Download .rbxl</div>
+                        </div>
+
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/Autumn.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/Autumn.png" alt="Pirate Army HQ Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">Autumn</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@XxTHeUltimatePwnerxX</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">2011E</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Dec 1, 2025</span></span>
+                            <div class="download-button" data-map-id="grave_yard">Download .rbxl</div>
+                        </div>
+
+                        <div class="game-thumb">
+                            <a href="https://novetus-fandom.github.io/assets/download/coke%20island.rbxl">
+                                <div class="game-image">
+                                    <img src="https://novetus-fandom.github.io/assets/thumbs/coke%20island.png" alt="coke island Thumbnail" onerror="this.onerror=null; this.src='https://placehold.co/150x90/CCCCCC/666666?text=NO+IMG';">
+                                </div>
+                                <span class="game-title">coke island</span>
+                            </a>
+                            <span class="map-meta">Creator: <span style="font-weight: bold;">@brickmason</span></span>
+                            <span class="map-meta">Min Version: <span style="font-weight: bold;">@XxTHeUltimatePwnerxX</span></span>
+                            <span class="map-meta">Client Type: <span style="font-weight: bold;">Stable & Snapshot</span></span>
+                            <span class="map-meta">Added: <span style="font-weight: bold;">Dec 1, 2025</span></span>
+                            <div class="download-button" data-map-id="grave_yard">Download .rbxl</div>
+                        </div>
+                        <!-- NOTE: If you add one more map here, four will appear on a single line on wide displays. -->
+                    </div>
+                </div>
+
+                <!-- SUGGEST A MAP FORM (UPDATED) -->
+                <div id="suggest-map-pane" class="content-box">
+                    <div class="box-header">Suggest a New Map (All Fields Required)</div>
+                    <div style="padding: 10px;">
+                        <form id="map-suggestion-form">
+                            <!-- NEW USERNAME FIELD -->
+                            <div class="form-group">
+                                <label for="novetus-username">Novetus Username:</label>
+                                <input type="text" id="novetus-username" required placeholder="Your Novetus display name">
+                            </div>
+                            <!-- END NEW USERNAME FIELD -->
+                            <div class="form-group">
+                                <label for="map-name">Map Name:</label>
+                                <input type="text" id="map-name" required placeholder="e.g., Bloxburg Castle">
+                            </div>
+                            <div class="form-group">
+                                <label for="min-version">Minimum Roblox Version:</label>
+                                <select id="min-version" required>
+                                    <option value="" disabled selected>Select Minimum Version</option>
+                                    <option value="2006S">2006S</option>
+                                    <option value="2007E">2007E</option>
+                                    <option value="2007M">2007M</option>
+                                    <option value="2008M">2008M</option>
+                                    <option value="2009E">2009E</option>
+                                    <option value="2009E-HD">2009E-HD</option>
+                                    <option value="2009L">2009L</option>
+                                    <option value="2010L">2010L</option>
+                                    <option value="2011E">2011E</option>
+                                    <option value="2011M">2011M</option>
+                                    <option value="2012M">2012M</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="client-type">Novetus Client Type:</label>
+                                <select id="client-type" required>
+                                    <option value="" disabled selected>Select Client Type</option>
+                                    <option value="Stable">Stable</option>
+                                    <option value="Snapshot">Snapshot</option>
+                                    <!-- NEW CLIENT TYPE -->
+                                    <option value="Stable & Snapshot">Stable & Snapshot</option>
+                                    <!-- END NEW CLIENT TYPE -->
+                                </select>
+                            </div>
+                            <!-- REQUIRED FILE UPLOAD FIELD -->
+                            <div class="form-group">
+                                <label for="map-file">Upload .RBXL Map File (Max 8MB):</label>
+                                <input type="file" id="map-file" name="map-file" accept=".rbxl" required>
+                            </div>
+                            <!-- END REQUIRED FILE FIELD -->
+                            <button type="submit" id="submit-suggestion" class="download-button" style="margin-top: 10px;">Submit Suggestion</button>
+                            <p id="submission-message" style="margin-top: 10px; font-size: 9pt; color: #555;"></p>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- FOOTER --><div id="footer">
+            This is a fan-made Novetus Map Archive and is not affiliated with or endorsed by the official Novetus creators. &copy; 2024.
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC --><script>
+        
+        // --- DOWNLOAD LOGIC (FIXED) ---
+        const handleDownload = (e) => {
+            const button = e.currentTarget;
+
+            // FIX: If the button is the submission button, stop the function immediately
+            if (button.id === 'submit-suggestion') {
+                return;
+            }
+
+            e.preventDefault(); 
+            
+            // 1. Find the nearest ancestor map card (.game-thumb)
+            const gameThumb = button.closest('.game-thumb');
+            
+            // Critical Check: If gameThumb is null, something is wrong, log it and stop.
+            if (!gameThumb) {
+                console.error("Download button clicked but could not find parent .game-thumb element.");
+                // Optionally give user feedback here if this happens unexpectedly
+                return;
+            }
+
+            // 2. Find the <a> tag which holds the correct download URL
+            const linkElement = gameThumb.querySelector('a');
+            
+            // 3. Use the correctly formed URL from the existing <a> tag's href
+            const correctDownloadUrl = linkElement.href;
+            
+            // 4. Use the game title for a cleaner local filename
+            const mapTitle = linkElement.querySelector('.game-title').textContent.trim();
+            const mapFileName = mapTitle + '.rbxl';
+            
+            // 5. Simulate the file download
+            const tempLink = document.createElement('a');
+            tempLink.href = correctDownloadUrl; 
+            tempLink.download = mapFileName;
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            
+            // 6. Give user feedback
+            const originalText = button.textContent;
+            button.textContent = "Downloading...";
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1500);
+        };
+        
+        const attachDownloadListeners = () => {
+            // Only attach the download handler to buttons *within* a game-thumb card, 
+            // excluding the submission button which shares the class but has a different ID/context.
+            document.querySelectorAll('.games-grid .download-button').forEach(button => {
+                button.addEventListener('click', handleDownload);
+            });
+        };
+
+        // --- DISCORD WEBHOOK LOGIC (CONFIRMED TO SEND FILE DIRECTLY) ---
+        // The file limit for Discord webhooks is 8MB.
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1444779442407739523/4QdeICUe9rWvomkvynO8xPYtT04aROuY7sPems572uz5iR9HC3lTBJb8RrPb1jmbkLnq";
+        const MAX_FILE_SIZE_MB = 8; 
+
+        const form = document.getElementById('map-suggestion-form');
+        const messageElement = document.getElementById('submission-message');
+        const submitButton = document.getElementById('submit-suggestion');
+
+        const handleMapSuggestion = async (e) => {
+            e.preventDefault();
+
+            messageElement.textContent = "Submitting suggestion and uploading file...";
+            messageElement.style.color = "#555";
+            submitButton.disabled = true;
+
+            const novetusUsername = document.getElementById('novetus-username').value.trim();
+            const mapName = document.getElementById('map-name').value.trim();
+            const minVersion = document.getElementById('min-version').value;
+            const clientType = document.getElementById('client-type').value;
+            
+            const mapFileInput = document.getElementById('map-file');
+            const mapFile = mapFileInput.files[0];
+
+            // ENFORCED MANDATORY CHECK FOR ALL FIELDS
+            if (!novetusUsername || !mapName || !minVersion || !clientType || !mapFile) {
+                messageElement.textContent = "Error: All fields are mandatory, including the Novetus Username and the .RBXL map file upload.";
+                messageElement.style.color = "#CC0000";
+                submitButton.disabled = false;
+                return;
+            }
+
+            // File Size Check (Discord limit is 8MB for webhooks)
+            if (mapFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+                 messageElement.textContent = `Error: The map file size is ${(mapFile.size / 1024 / 1024).toFixed(2)} MB, which exceeds the limit of ${MAX_FILE_SIZE_MB} MB.`;
+                messageElement.style.color = "#CC0000";
+                submitButton.disabled = false;
+                return;
+            }
+
+
+            const submissionDate = new Date().toLocaleString('en-US', { 
+                year: 'numeric', month: 'short', day: 'numeric', 
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+
+            // 1. Create a Discord embed payload (JSON part)
+            const embedPayload = {
+                embeds: [{
+                    title: "New Map Suggestion Received (File Attached)",
+                    color: 3447003, // Blue color
+                    fields: [
+                        {
+                            name: "Suggested By (Novetus User)",
+                            value: `**${novetusUsername}**`,
+                            inline: false
+                        },
+                        {
+                            name: "Map Name",
+                            value: mapName,
+                            inline: false
+                        },
+                        {
+                            name: "Minimum Version",
+                            value: minVersion,
+                            inline: true
+                        },
+                        {
+                            name: "Client Type",
+                            value: clientType,
+                            inline: true
+                        },
+                        {
+                            name: "File Details",
+                            value: `**Filename:** \`${mapFile.name}\`\n**Size:** ${(mapFile.size / 1024 / 1024).toFixed(2)} MB`,
+                            inline: false
+                        },
+                        {
+                            name: "Submission Date (Local)",
+                            value: submissionDate,
+                            inline: false
+                        }
+                    ],
+                    footer: {
+                        text: "Map Archive Suggestion Form"
+                    },
+                    timestamp: new Date().toISOString() 
+                }]
+            };
+
+            // 2. Create FormData object for multipart/form-data submission
+            const formData = new FormData();
+            
+            // Append the JSON payload as a string
+            formData.append('payload_json', JSON.stringify(embedPayload));
+            
+            // Append the actual file. Discord expects the file under the key 'file'
+            formData.append('file', mapFile, mapFile.name);
+
+            try {
+                // Implementing exponential backoff for robustness
+                const maxRetries = 3;
+                let response;
+                
+                for (let attempt = 0; attempt < maxRetries; attempt++) {
+                    response = await fetch(DISCORD_WEBHOOK_URL, {
+                        method: 'POST',
+                        // NOTE: Do not set Content-Type header; fetch handles it correctly for FormData
+                        body: formData, 
+                    });
+
+                    if (response.ok || response.status === 204) {
+                        break; 
+                    }
+
+                    if (attempt < maxRetries - 1) {
+                        const delay = Math.pow(2, attempt) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                    }
+                }
+
+                if (response && (response.ok || response.status === 204)) {
+                    messageElement.textContent = `Success! Your map suggestion (${mapFile.name}) has been submitted and the file is attached. Thank you, ${novetusUsername}!`;
+                    messageElement.style.color = "#00AA00";
+                    form.reset(); // Clear the form on success
+                } else {
+                    const status = response ? response.status : 'N/A';
+                    messageElement.textContent = `Error submitting suggestion (Status: ${status}). Please ensure the file is valid and under ${MAX_FILE_SIZE_MB}MB.`;
+                    messageElement.style.color = "#CC0000";
+                    if (response) {
+                        console.error('Webhook error response:', await response.text());
+                    } else {
+                        console.error('Webhook request failed without a response.');
+                    }
+                }
+            } catch (error) {
+                console.error('Fetch failed:', error);
+                messageElement.textContent = "Network error or server error. Check your connection.";
+                messageElement.style.color = "#CC0000";
+            } finally {
+                submitButton.disabled = false;
+            }
+        };
+
+        const attachSuggestionListener = () => {
+            if (form) {
+                form.addEventListener('submit', handleMapSuggestion);
+            }
+        };
+
+        // --- FUN FACTS LOGIC ---
+        const sillyFacts = [
+            "The opposite of vanilla is chocolate.",
+            "Life is Novetus",
+            "Most recommended version to play on is 2011M",
+            "i lov roblo",
+            "this website was made by XxTHeUltimatePwnerxX",
+            "roblox used to have tix instead of bobux",
+            "build something! in notevus i guess...",
+            "roblox.com but... retro version!"
+        ];
+
+        const factDisplayElement = document.getElementById('fact-display');
+
+        const displayRandomFact = () => {
+            if (!factDisplayElement) return;
+            const randomIndex = Math.floor(Math.random() * sillyFacts.length);
+            factDisplayElement.textContent = sillyFacts[randomIndex];
+        };
+        
+        const startFactRotation = () => {
+            displayRandomFact(); // Display one immediately
+            // Rotate every 8 seconds
+            setInterval(displayRandomFact, 8000); 
+        };
+
+        // --- PARALLAX SCROLL LOGIC ---
+        const PARALLAX_FACTOR = 0.3; // 30% of scroll speed for slow movement
+
+        const handleParallaxScroll = () => {
+            // Get current scroll position
+            const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate the new Y position for the background, making it move slower than the content
+            const newY = -(scrollOffset * PARALLAX_FACTOR); 
+            
+            // Apply the new background position, keeping the X position centered
+            document.body.style.backgroundPosition = `center ${newY}px`;
+        };
+
+
+        // Initialize everything when the page loads
+        window.onload = function() {
+            startFactRotation();
+            handleParallaxScroll(); 
+            window.addEventListener('scroll', handleParallaxScroll);
+            attachDownloadListeners();
+            attachSuggestionListener(); // Attach the new form handler
+        };
+
+    </script>
+</body>
+</html>
