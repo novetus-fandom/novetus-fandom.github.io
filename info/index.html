@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novetus - Info</title>
+    <!-- Favicon / Tab Icon -->
+    <link rel="icon" type="image/png" href="https://novetus-fandom.github.io/assets/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 1. Slow/Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 2. Custom Retro Scrollbar (Webkit browsers) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Set a standard retro width */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F0F0; /* Light gray track */
+            border-left: 1px solid #C0C0C0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #A0A0A0; /* Gray thumb */
+            border: 1px solid #777777; /* Dark border for definition */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+        }
+        
+        /* Minimal Retro Aesthetic */
+        body {
+            /* Background Image: New Roblox Stud Texture */
+            background-image: url('https://tr.rbxcdn.com/180DAY-7a08aac3c46b12a65380007ecc18c9f4/420/420/Decal/Webp/noFilter');
+            background-repeat: repeat;
+            background-size: 50px 50px;
+            background-position: center top; 
+            background-color: #50C878; /* Emerald Green base color */
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container - Responsive Width, Centered */
+        #container {
+            max-width: 970px; /* Max fixed width */
+            width: 95%; /* Fluid width for mobile responsiveness */
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        /* Header / Navigation Bar */
+        #header {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-logo {
+            padding-right: 20px;
+        }
+
+        .header-logo img {
+            height: 30px; 
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        #header a:not(.header-logo) {
+            margin-right: 15px;
+            color: #777;
+            font-weight: bold;
+        }
+        
+        /* Highlight the active link (Info) */
+        #header a.active {
+            color: #CC0000; /* Red color for active tab */
+        }
+
+        /* Content Layout - Two Columns */
+        #content-area {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Main column (66%) and Sidebar (33%) */
+            gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            #content-area {
+                grid-template-columns: 1fr; /* Stack columns on smaller screens */
+            }
+            #main-content { order: 1; }
+            #sidebar { order: 2; }
+        }
+
+        /* Standard Content Box Style */
+        .content-box {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px; /* Space between boxes within columns */
+        }
+
+        .box-header {
+            background-color: #DDDDDD;
+            border-bottom: 1px solid #AFAFAF;
+            padding: 5px 10px;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #555555;
+        }
+        
+        /* Fun Fact Box Specific Style */
+        #fun-fact-box {
+            background-color: #EFCC00; 
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        .fun-fact-text {
+            font-size: 10pt;
+            font-weight: normal;
+            color: #000000;
+            font-style: italic;
+            margin: 0;
+        }
+        
+        /* Content for Notices/Logs */
+        .content-padding {
+            padding: 10px;
+        }
+        
+        /* Detailed text styling */
+        .info-section h2 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #0066CC;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .info-section p {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .info-list {
+            list-style-type: square;
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-size: 9pt;
+        }
+        .info-list li {
+            margin-bottom: 3px;
+        }
+        
+        /* System Requirements Table Style */
+        .req-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin-top: 5px;
+        }
+        .req-table th, .req-table td {
+            border: 1px solid #E0E0E0;
+            padding: 5px;
+            text-align: left;
+        }
+        .req-table th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+            color: #333;
+        }
+        .req-table tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+
+        /* Footer with White Frame */
+        #footer {
+            background-color: #FFFFFF; /* White background */
+            border: 1px solid #AFAFAF; /* Frame border */
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            padding: 10px 0; /* Reduced vertical padding */
+            margin-top: 10px; /* Space above footer */
+            grid-column: 1 / -1; /* Span across both columns */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <!-- HEADER / NAVIGATION --><div id="header">
+            <a href="https://novetus-fandom.github.io/home/" class="header-logo">
+                 <img src="https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png" alt="NOVETUS Logo">
+            </a>
+            <a href="https://novetus-fandom.github.io/home/">Home</a>
+            <a href="https://novetus-fandom.github.io/maps/">Maps</a>
+            <a href="https://bitl.itch.io/novetus">Client Download</a>
+            <a href="https://novetus-fandom.github.io/info/">Info</a>
+        </div>
+        
+        <!-- FUN FACT BOX --><div id="fun-fact-box">
+            <p id="fact-display" class="fun-fact-text">
+                Loading fun fact...
+            </p>
+        </div>
+
+        <!-- MAIN CONTENT AREA (Two Columns) --><div id="content-area">
+
+            <!-- MAIN COLUMN: Project Info and Features --><div id="main-content">
+                
+                <!-- PROJECT OVERVIEW --><div id="overview-pane" class="content-box">
+                    <div class="box-header">About The Novetus Project</div>
+                    <div class="content-padding info-section">
+                        <h2>What is Novetus?</h2>
+                        <p>
+                            Novetus is a community-developed, offline/LAN revival project dedicated to preserving and celebrating the early history of the Roblox platform (2006-2012 era clients). It is a standalone client package that allows users to host and play vintage Roblox games without needing the official Roblox service.
+                        </p>
+                        <p>
+                            Our goal is to create a fully functional, highly customizable, and open-source environment where the classic features, physics, and gameplay experience of those iconic years can be recreated and enjoyed by new and old fans alike.
+                        </p>
+                        
+                        <h2>Key Features & Goals</h2>
+                        <ul class="info-list">
+                            <li><strong>Multi-Client Support:</strong> Includes multiple clients ranging from the 2006 to 2012 era, each meticulously configured.</li>
+                            <li><strong>Offline/LAN Play:</strong> Host and join games locally or over a LAN/VPN without relying on external servers.</li>
+                            <li><strong>Master Server Integration:</strong> Functionality for community-run master servers to host public games.</li>
+                            <li><strong>Scripting & Modding Tools:</strong> Built-in Client SDK and custom scripting support for easier customization.</li>
+                            <li><strong>Asset Redirection:</strong> Use a local asset database to load old textures, meshes, and sounds accurately.</li>
+                            <li><strong>Archival:</strong> Preservation of historical client versions and maps for educational purposes.</li>
+                        </ul>
+
+                        <h2>Legal & Disclaimer</h2>
+                        <p class="text-xs text-red-700 italic border border-red-200 p-2 rounded">
+                            Novetus is strictly a non-profit, fan-made archival project and is not affiliated with, endorsed, or sponsored by the Roblox Corporation. All trademarks and copyrights related to Roblox are property of their respective owners. Novetus does not use any current or copyrighted assets from the live Roblox platform.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- DEVELOPMENT STATUS --><div id="status-pane" class="content-box">
+                    <div class="box-header">Development Status</div>
+                    <div class="content-padding info-section">
+                        <h2>Project Milestones</h2>
+                        <p>
+                            The project is currently in a highly stable snapshot phase (as noted on the homepage). Recent development has focused heavily on improving client compatibility, network stability (especially for 2007 clients), and enhancing the ClientScript framework for advanced modding.
+                        </p>
+                        <ul class="info-list">
+                            <li><strong>Focus:</strong> Stabilizing network synchronization across all supported legacy clients.</li>
+                            <li><strong>Upcoming:</strong> New features planned for map asset exporting and importing.</li>
+                            <li><strong>Community:</strong> Active development relies heavily on community contributions and bug reports (which can be submitted on the <a href="roblox_2011_homepage.html">Home</a> page!).</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIDEBAR COLUMN: Requirements and Community --><div id="sidebar">
+                
+                <!-- SYSTEM REQUIREMENTS --><div id="requirements-pane" class="content-box">
+                    <div class="box-header">System Requirements</div>
+                    <div class="content-padding">
+                        <p class="mb-2 text-xs">Since Novetus runs older clients, requirements are generally very low.</p>
+                        
+                        <table class="req-table">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Minimum</th>
+                                    <th>Recommended</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OS</td>
+                                    <td>Windows XP SP3 or newer</td>
+                                    <td>Windows 7 / 10 / 11</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>Any Dual-Core Processor</td>
+                                    <td>Modern Quad-Core Processor (2GHz+)</td>
+                                </tr>
+                                <tr>
+                                    <td>RAM</td>
+                                    <td>512 MB</td>
+                                    <td>2 GB+</td>
+                                </tr>
+                                <tr>
+                                    <td>Graphics</td>
+                                    <td>DirectX 9 compatible GPU</td>
+                                    <td>Any Modern GPU (DirectX 11/12)</td>
+                                </tr>
+                                <tr>
+                                    <td>Framework</td>
+                                    <td colspan="2">.NET Framework 4.6 (Included)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-2 text-xs italic text-gray-600">
+                            *Note: You must have the ability to run 32-bit applications.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- COMMUNITY & SOCIAL --><div id="community-pane" class="content-box">
+                    <div class="box-header">Community & Links</div>
+                    <div class="content-padding info-section">
+                        <ul class="info-list" style="list-style-type: none; margin-left: 0;">
+                            <li><a href="https://github.com/Novetus/Novetus_src/wiki" target="_blank" class="font-bold">Official Novetus Wiki</a></li>
+                            <li><a href="https://github.com/Novetus/" target="_blank" class="font-bold">GitHub Repository (Source)</a></li>
+                            <!-- NEW LINK: GitHub Issues/Bug Reports -->
+                            <li><a href="https://github.com/Novetus/Novetus_src/issues" target="_blank" class="font-bold">Bug Reports / Issues Tracker</a></li>
+                            <li><a href="https://discord.gg/SSTgEcU48n" target="_blank" class="font-bold">Discord Community Server</a></li>
+                            <li><a href="https://www.roblox.com/groups/13877677/Novetus-Official#!/about" target="_blank" class="font-bold">Roblox Official Group</a></li>
+                            <li><a href="https://bitl.itch.io/novetus" target="_blank" class="font-bold">Client Download (Itch.io)</a></li>
+                            <li><a href="https://novetus-fandom.github.io/maps/" target="_blank" class="font-bold">Map Pack Archive</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- FOOTER -->
+            <div id="footer">
+                This is a fan-made Novetus Map Archive and is not affiliated with or endorsed by the official Novetus creators. &copy; 2024.
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC (Fun Facts and Parallax) --><script>
+        
+        // --- FUN FACTS LOGIC ---
+        const sillyFacts = [
+            "The opposite of vanilla is chocolate.",
+            "Life is Novetus",
+            "Most recommended version to play on is 2011M",
+            "i lov roblo",
+            "this website was made by XxTHeUltimatePwnerxX",
+            "roblox used to have tix instead of bobux",
+            "build something! in notevus i guess...",
+            "roblox.com but... retro version!"
+        ];
+
+        const factDisplayElement = document.getElementById('fact-display');
+
+        const displayRandomFact = () => {
+            if (!factDisplayElement) return;
+            const randomIndex = Math.floor(Math.random() * sillyFacts.length);
+            factDisplayElement.textContent = sillyFacts[randomIndex];
+        };
+        
+        const startFactRotation = () => {
+            displayRandomFact(); // Display one immediately
+            // Rotate every 8 seconds
+            setInterval(displayRandomFact, 8000); 
+        };
+
+        // --- PARALLAX SCROLL LOGIC ---
+        const PARALLAX_FACTOR = 0.3; 
+
+        const handleParallaxScroll = () => {
+            const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+            const newY = -(scrollOffset * PARALLAX_FACTOR); 
+            document.body.style.backgroundPosition = `center ${newY}px`;
+        };
+
+
+        // Initialize everything when the page loads
+        window.onload = function() {
+            startFactRotation();
+            handleParallaxScroll(); 
+            window.addEventListener('scroll', handleParallaxScroll);
+        };
+
+    </script>
+</body>
+</html>
