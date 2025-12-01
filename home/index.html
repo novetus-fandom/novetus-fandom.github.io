@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novetus - Home</title>
+    <!-- Favicon / Tab Icon -->
+    <link rel="icon" type="image/png" href="https://novetus-fandom.github.io/assets/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 1. Slow/Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 2. Custom Retro Scrollbar (Webkit browsers) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Set a standard retro width */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F0F0; /* Light gray track */
+            border-left: 1px solid #C0C0C0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #A0A0A0; /* Gray thumb */
+            border: 1px solid #777777; /* Dark border for definition */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+        }
+
+        #header a.active {
+            color: #CC0000; /* Red color for active tab */
+        }
+        
+        /* Minimal Retro Aesthetic */
+        body {
+            /* Background Image: New Roblox Stud Texture */
+            background-image: url('https://tr.rbxcdn.com/180DAY-7a08aac3c46b12a65380007ecc18c9f4/420/420/Decal/Webp/noFilter');
+            background-repeat: repeat;
+            background-size: 50px 50px;
+            background-position: center top; 
+            background-color: #50C878; /* Emerald Green base color */
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container - Responsive Width, Centered */
+        #container {
+            max-width: 970px; /* Max fixed width */
+            width: 95%; /* Fluid width for mobile responsiveness */
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        /* Header / Navigation Bar */
+        #header {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-logo {
+            padding-right: 20px;
+        }
+
+        .header-logo img {
+            height: 30px; 
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        #header a:not(.header-logo) {
+            margin-right: 15px;
+            color: #777;
+            font-weight: bold;
+        }
+
+        /* Content Layout - Two Columns */
+        #content-area {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Main column (66%) and Sidebar (33%) */
+            gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            #content-area {
+                grid-template-columns: 1fr; /* Stack columns on smaller screens */
+            }
+            #main-content { order: 1; }
+            #sidebar { order: 2; }
+        }
+
+        /* Standard Content Box Style */
+        .content-box {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px; /* Space between boxes within columns */
+        }
+
+        .box-header {
+            background-color: #DDDDDD;
+            border-bottom: 1px solid #AFAFAF;
+            padding: 5px 10px;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #555555;
+        }
+        
+        /* Fun Fact Box Specific Style */
+        #fun-fact-box {
+            background-color: #EFCC00; 
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        .fun-fact-text {
+            font-size: 10pt;
+            font-weight: normal;
+            color: #000000;
+            font-style: italic;
+            margin: 0;
+        }
+        
+        /* Content for Notices/Logs */
+        .content-padding {
+            padding: 10px;
+        }
+        
+        .log-entry {
+            border-bottom: 1px solid #EEE;
+            padding: 8px 0;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-version {
+            font-weight: bold;
+            color: #CC0000;
+            font-size: 10pt;
+            margin-bottom: 2px;
+        }
+        .log-date {
+            font-size: 8pt;
+            color: #999;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .log-detail {
+            font-size: 9pt;
+            margin-left: 5px;
+            list-style-type: disc;
+        }
+        
+        /* Bug Report Form Styles */
+        #bug-report-form label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 3px;
+            font-size: 9pt;
+        }
+        #bug-report-form input[type="text"], 
+        #bug-report-form textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #AFAFAF;
+            background-color: #F8F8F8;
+            box-sizing: border-box; /* Include padding/border in the element's total width and height */
+            font-size: 9pt;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* NEW: Style for file input */
+        #bug-report-form input[type="file"] {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 9pt;
+        }
+        
+        #bug-report-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-button {
+            display: block;
+            width: 100%;
+            background-color: #008800;
+            color: #FFFFFF;
+            font-size: 10pt;
+            font-weight: bold;
+            padding: 8px;
+            margin-top: 15px;
+            border: 1px solid #006600;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        
+        .submit-button:hover {
+            background-color: #00AA00;
+        }
+        
+        #status-message {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 9pt;
+            text-align: center;
+            padding: 5px;
+        }
+
+
+        /* Footer with White Frame */
+        #footer {
+            background-color: #FFFFFF; /* White background */
+            border: 1px solid #AFAFAF; /* Frame border */
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            padding: 10px 0; /* Reduced vertical padding */
+            margin-top: 10px; /* Space above footer */
+            grid-column: 1 / -1; /* Span across both columns */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <!-- HEADER / NAVIGATION --><div id="header">
+            <a href="https://novetus-fandom.github.io/home/" class="header-logo">
+                 <img src="https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png" alt="NOVETUS Logo">
+            </a>
+            <a href="https://novetus-fandom.github.io/home/" class="active">Home</a>
+            <!-- MAPS LINK UPDATED -->
+            <a href="https://novetus-fandom.github.io/maps/">Maps</a>
+            <!-- CLIENT DOWNLOAD LINK UPDATED -->
+            <a href="https://bitl.itch.io/novetus">Client Download</a>
+            <a href="https://novetus-fandom.github.io/info/">Info</a>
+        </div>
+        
+        <!-- FUN FACT BOX --><div id="fun-fact-box">
+            <p id="fact-display" class="fun-fact-text">
+                Loading fun fact...
+            </p>
+        </div>
+
+        <!-- MAIN CONTENT AREA (Two Columns) --><div id="content-area">
+
+            <!-- MAIN COLUMN: Client Notice and Update Logs --><div id="main-content">
+                
+                <!-- CLIENT NOTICE --><div id="client-notice-pane" class="content-box">
+                    <div class="box-header">IMPORTANT: Client Notice</div>
+                    <div class="content-padding">
+                        <h2 class="text-lg font-bold text-green-700 mb-2">Recommended Client Version</h2>
+                        <p class="mb-3 text-sm">
+                            To ensure maximum compatibility with map scripts and exploit the latest network fixes, we strongly recommend using the <strong>2011M client version</strong>. This version is the most stable for running downloaded map scripts successfully.
+                        </p>
+                        <ul class="list-disc ml-5 text-xs text-gray-600">
+                            <li>2011M offers the best balance for running custom scripts and recent maps.</li>
+                            <li>Using other clients may result in scripts not loading correctly.</li>
+                            <li>Always check the client-specific compatibility notes before launching.</li>
+                        </ul>
+                        <div class="mt-3 text-right text-xs italic text-gray-500">
+                            Last Updated: 2024/12/01
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPDATE LOGS --><div id="update-logs-pane" class="content-box">
+                    <div class="box-header">Recent Update Logs</div>
+                    <div class="content-padding" id="update-logs-list">
+                        
+                        <!-- Log Entry 1: Snapshot v25.9451.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9451.1</div>
+                            <span class="log-date">Released: 2025-11-30</span>
+                            <ul class="log-detail">
+                                <li><strong>Fixes:</strong> Fixed the 3D Preview not functioning.</li>
+                                <li><strong>Fixes:</strong> Fixed a bug where the "Export Script" Client SDK option doesn't override the existing file, and instead puts another copy of the script into it.</li>
+                                <li><strong>Fixes:</strong> Fixed an issue where 2007 clients in Play Solo couldn't function with maps with thousands of bricks.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 2: Snapshot v25.9443.2 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9443.2</div>
+                            <span class="log-date">Released: 2025-11-25</span>
+                            <ul class="log-detail">
+                                <li><strong>Fixes:</strong> Restored The Tales of the Sphere's description.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 3: Snapshot v25.9443.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9443.1</div>
+                            <span class="log-date">Released: 2025-11-20</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> Added the Novetus AssetDelivery repo! <a href="https://github.com/Novetus/novetus-assetdelivery" target="_blank">https://github.com/Novetus/novetus-assetdelivery</a></li>
+                                <li><strong>Fixes:</strong> Fixed 2006S and 2007 clients having a "NetworkClient is not a valid service name" error when launching certain places.</li>
+                                <li><strong>Fixes:</strong> Fixed servers with no graphics being unable to start up.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 4: Snapshot v25.9409.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9409.1</div>
+                            <span class="log-date">Released: 2025-11-15</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> Novetus's launcher and masterserver scripts have moved licenses to the MIT!</li>
+                                <li><strong>Enhancements:</strong> Added the ClientLaunchTimeOffset configuration variable, which adds an additional amount of buffer time (in minutes) for client launches. By default, this is set to 0.0. Can only be set up to 2.0. Change this value in config/config.json if you're unable to load clients on slower hardware.</li>
+                                <li><strong>Enhancements:</strong> Added ClientScript compilation error reports for client developers.</li>
+                                <li><strong>Fixes:</strong> Fixed Play Solo clients not launching as expected.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 5: Snapshot v25.9395.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9395.1</div>
+                            <span class="log-date">Released: 2025-11-10</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> %args% is now deprecated in favor of raw ClientScript, making it easier for modders to add in later clients.
+                                    <ul class="log-detail ml-5">
+                                        <li>All clients now use full ClientScript instead of using %args%. See the ClientScript documentation for updated code.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Enhancements:</strong> Added %launchscript%, %launchscriptraw%, %no3d% and %scriptfunc% ClientScript variables.
+                                    <ul class="log-detail ml-5">
+                                        <li>%launchscript% - Returns the launch script name. If this client is a 2007 client or similar, it will return the generated script file.</li>
+                                        <li>%launchscriptraw% - Returns the launch script name regardless of what client is loaded.</li>
+                                        <li>%scriptfunc% - Returns the script function related to the client type that was loaded.</li>
+                                        <li>%no3d% - Appends the -no3d launch parameter if no3d mode is enabled. More applicable to the Server script type.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Deprecation:</strong> Deprecated the no3d tag as it was unneccesary due to the new %no3d% variable.</li>
+                                <li><strong>Fixes:</strong> Fixed the shared tag being broken.</li>
+                                <li><strong>Fixes:</strong> Fixed a crash that occured if the "scripts" folder was missing when launching the ClientScriptTester.</li>
+                                <li><strong>Fixes:</strong> Attempt to fix the "cancelled by user" error on Windows 11.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 6: Snapshot v25.9352.2 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9352.2</div>
+                            <span class="log-date">Released: 2025-11-05</span>
+                            <ul class="log-detail">
+                                <li><strong>Fixes:</strong> Improved version number readability to prevent weird version number discrepancies.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 7: Snapshot v25.9352.18178.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9352.18178.1</div>
+                            <span class="log-date">Released: 2025-10-25</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> The Web Proxy can now be easily enabled without console commands.</li>
+                                <li><strong>Enhancements:</strong> The Tripcode is now static and no longer changes every session. The tripcode will now only change if the player name or ID changes.</li>
+                                <li><strong>Fixes:</strong> Fixed Work At A Pizza Place having a GUI that advertised a website.</li>
+                                <li><strong>Removal:</strong> Removed 2012E - Happy Home in Robloxia due to its instability.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 8: Snapshot v25.9246.21242.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9246.21242.1</div>
+                            <span class="log-date">Released: 2025-10-15</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> Rewrote the tripcode system to use information from the user's Novetus install, rather than their PC hardware.
+                                    <ul class="log-detail ml-5">
+                                        <li>The new tripcode uses the Novetus Version, Launcher MD5, Player Name and ID, and a random number. The tripcode is changed per session.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Enhancements:</strong> Added the ability to export scripts from the Client SDK.</li>
+                                <li><strong>Enhancements:</strong> Improved 2007 client network responsiveness. Credits to Nukley and Vulpovile for the settings.</li>
+                                <li><strong>Enhancements:</strong> Added a 2017L Studio for easier map editing and map conversion.</li>
+                                <li><strong>Enhancements:</strong> Added %disable% for disabling ClientScript tags.</li>
+                                <li><strong>Enhancements:</strong> Improved ClientScript v2 handling.</li>
+                                <li><strong>Enhancements:</strong> Added the ability to create .dmp files upon a crash.</li>
+                                <li><strong>Fixes:</strong> Fixed pieces of code that were causing false positives in some online malware scanners.</li>
+                                <li><strong>Fixes:</strong> Fixed an error that would show up if you try to close the console.</li>
+                                <li><strong>Fixes:</strong> Increased the load time for various clients to fix an issue where launching clients don't load the script.</li>
+                                <li><strong>Fixes:</strong> Fixed the clientinfo version number not changing when a modern clientinfo is opened.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 9: Snapshot v25.9216.36080.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9216.36080.1</div>
+                            <span class="log-date">Released: 2025-10-05</span>
+                            <ul class="log-detail">
+                                <li><strong>Notes:</strong> In response to the new Roblox Asset Delivery changes, the Asset Redirection Extension has been set to local assets only and the Roblox asset delivery content provider is no longer available. The Web Proxy only Roblox content provider has been renamed to "Roblox Local".</li>
+                                <li><strong>Enhancements:</strong> Web Proxy extensions are now installed in the "extensions\webproxy" folder instead of the "addons\novetusexts\extensions\webproxy" folder.</li>
+                                <li><strong>Enhancements:</strong> Improved Server Browser error handling.</li>
+                                <li><strong>Enhancements:</strong> Redid implementation of 2011-2012 client script loading.</li>
+                                <li><strong>Enhancements:</strong> Added over 3,000+ additional assets for use with the Web Proxy. (credits to Jozuno)</li>
+                                <li><strong>Enhancements:</strong> Localized all places in the Novetus Map Pack.</li>
+                                <li><strong>Fixes:</strong> The Server Browser will no longer run the same refresh task multiple times.</li>
+                                <li><strong>Fixes:</strong> Fixed a bug where Novetus may delete some place files if there is not a compressed version available.</li>
+                                <li><strong>Fixes:</strong> Fixed a bug with the Custom Graphics Options where some settings are enabled despite not those settings not existing in the first place.</li>
+                                <li><strong>Fixes:</strong> Fixed some visual Asset Fixer bugs.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Log Entry 10: Snapshot v25.9180.31038.1 -->
+                        <div class="log-entry">
+                            <div class="log-version">Snapshot v25.9180.31038.1</div>
+                            <span class="log-date">Released: 2025-09-25</span>
+                            <ul class="log-detail">
+                                <li><strong>Enhancements:</strong> Updated Novetus to .NET Framework 4.6, the last version compatible with Windows Vista.</li>
+                                <li><strong>Fixes:</strong> Fixed a bug in later clients where the launcher launches even if script files aren't validated.</li>
+                                <li><strong>Fixes:</strong> Fixed "Client is Modified" errors when using 2012M.</li>
+                                <li><strong>Fixes:</strong> Fixed 2012M not respecting game.Players.CharacterAutoLoads.</li>
+                                <li><strong>Fixes:</strong> Fixed the camera zooming out when respawning in 2012M.
+                                    <ul class="log-detail ml-5">
+                                        <li>game.Lighting.DisableRespawns no longer functions as respawning is a part of the 2012M client's code. Use game.Players.CharacterAutoLoads = false for this functionality.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Fixes:</strong> Fixed an issue where client windows can't load the script while others are open after a period of time.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIDEBAR COLUMN: Bug Report --><div id="sidebar">
+                
+                <!-- REPORT BUG --><div id="report-bug-pane" class="content-box">
+                    <div class="box-header">Report A Bug / Glitch</div>
+                    <div class="content-padding">
+                        <form id="bug-report-form">
+                            <label for="reporter-name">Your Name/Discord ID (Optional):</label>
+                            <input type="text" id="reporter-name" placeholder="Guest or Your ID">
+                            
+                            <label for="bug-description">Detailed Bug Description: <span style="color:red;">*</span></label>
+                            <textarea id="bug-description" required placeholder="Example: In client 2009E, loading 'Rocket Arena' causes a crash if the rocket launcher is equipped..."></textarea>
+                            
+                            <!-- MANDATORY FILE UPLOAD -->
+                            <label for="bug-proof-file">Proof File/Screenshot: <span style="color:red;">*</span></label>
+                            <input type="file" id="bug-proof-file" required>
+                            
+                            <button type="submit" class="submit-button" id="submit-bug-button">Submit Bug Report</button>
+                            
+                            <div id="status-message" style="display: none;"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- FOOTER -->
+            <div id="footer">
+                This is a fan-made Novetus Map Archive and is not affiliated with or endorsed by the official Novetus creators. &copy; 2024.
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC (Fun Facts, Parallax, and Webhook) --><script>
+        
+        // --- WEBHOOK CONFIGURATION ---
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1444712271744995509/WCKU_p7zE4MPfCaBqbeWwvU7AaJD7RkMRCTOP4Sfig9hmBoVhBW0rIVf0PU7BTL7ib0r";
+        const form = document.getElementById('bug-report-form');
+        const statusMessage = document.getElementById('status-message');
+        const submitButton = document.getElementById('submit-bug-button');
+        const fileInput = document.getElementById('bug-proof-file');
+
+        // --- BUG REPORT SUBMISSION ---
+        const submitBugReport = async (event) => {
+            event.preventDefault();
+            
+            const name = document.getElementById('reporter-name').value.trim() || 'Anonymous Guest';
+            const description = document.getElementById('bug-description').value.trim();
+            const file = fileInput.files[0];
+
+            // 1. Mandatory Text Check
+            if (!description) {
+                statusMessage.textContent = "Error: Description cannot be empty.";
+                statusMessage.style.backgroundColor = '#FFDDDD';
+                statusMessage.style.color = '#CC0000';
+                statusMessage.style.display = 'block';
+                return;
+            }
+            
+            // 2. Mandatory File Check (NEW)
+            if (!file) {
+                statusMessage.textContent = "Error: A proof file or screenshot is required.";
+                statusMessage.style.backgroundColor = '#FFDDDD';
+                statusMessage.style.color = '#CC0000';
+                statusMessage.style.display = 'block';
+                return;
+            }
+            
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending...";
+            statusMessage.style.display = 'none';
+
+            // 3. Construct Discord Embed Payload (as JSON string for multipart form)
+            const embedPayload = {
+                username: "Novetus Bug Reporter",
+                avatar_url: "https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png",
+                embeds: [{
+                    title: `New Bug Report - ${name}`,
+                    color: 16711680, // Red color (0xFF0000)
+                    fields: [
+                        { name: "Reported By", value: name, inline: true },
+                        { name: "File Name", value: file.name, inline: true }, // Include file name in embed
+                        { name: "Description", value: description }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            // 4. Construct FormData (for file upload)
+            // We use FormData to send both the JSON payload and the file simultaneously.
+            const formData = new FormData();
+            formData.append('payload_json', JSON.stringify(embedPayload));
+            formData.append('file', file); // 'file' is the standard Discord file key
+
+            let success = false;
+            let lastError = null;
+
+            // Simple Exponential Backoff for Retries (Max 3 attempts)
+            for (let attempt = 0; attempt < 3; attempt++) {
+                try {
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        // Note: Content-Type is handled automatically by fetch/FormData for multipart/form-data
+                        body: formData // Send FormData instead of JSON string
+                    });
+
+                    if (response.ok) {
+                        success = true;
+                        break; // Success!
+                    } else {
+                        // Discord usually responds with JSON on error
+                        const errorData = await response.json().catch(() => ({ message: 'No JSON response body' }));
+                        lastError = `Discord Error: ${response.status} - ${JSON.stringify(errorData)}`;
+                        console.error(lastError);
+                        // Wait for exponential backoff before retrying
+                        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                    }
+                } catch (error) {
+                    lastError = `Network Error: ${error.message}`;
+                    console.error(lastError);
+                    // Wait for exponential backoff before retrying
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                }
+            }
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Bug Report";
+
+            // Update UI based on final result
+            if (success) {
+                statusMessage.textContent = "Success! Bug reported and file attached.";
+                statusMessage.style.backgroundColor = '#DDFFDD';
+                statusMessage.style.color = '#006600';
+                form.reset(); // Clear the form on successful submission
+            } else {
+                statusMessage.textContent = `Submission Failed. Please try again later. Details: ${lastError}`;
+                statusMessage.style.backgroundColor = '#FFDDDD';
+                statusMessage.style.color = '#CC0000';
+            }
+            statusMessage.style.display = 'block';
+        };
+
+        // --- FUN FACTS LOGIC (Retained) ---
+        const sillyFacts = [
+            "The opposite of vanilla is chocolate.",
+            "Life is Novetus",
+            "Most recommended version to play on is 2011M",
+            "i lov roblo",
+            "this website was made by XxTHeUltimatePwnerxX",
+            "roblox used to have tix instead of bobux",
+            "build something! in notevus i guess...",
+            "roblox.com but... retro version!"
+        ];
+
+        const factDisplayElement = document.getElementById('fact-display');
+
+        const displayRandomFact = () => {
+            if (!factDisplayElement) return;
+            const randomIndex = Math.floor(Math.random() * sillyFacts.length);
+            factDisplayElement.textContent = sillyFacts[randomIndex];
+        };
+        
+        const startFactRotation = () => {
+            displayRandomFact(); // Display one immediately
+            // Rotate every 8 seconds
+            setInterval(displayRandomFact, 8000); 
+        };
+
+        // --- PARALLAX SCROLL LOGIC (Retained) ---
+        const PARALLAX_FACTOR = 0.3; 
+
+        const handleParallaxScroll = () => {
+            const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+            const newY = -(scrollOffset * PARALLAX_FACTOR); 
+            document.body.style.backgroundPosition = `center ${newY}px`;
+        };
+
+
+        // Initialize everything when the page loads
+        window.onload = function() {
+            startFactRotation();
+            handleParallaxScroll(); 
+            window.addEventListener('scroll', handleParallaxScroll);
+            
+            // Attach bug report form listener
+            if (form) {
+                form.addEventListener('submit', submitBugReport);
+            }
+        };
+
+    </script>
+</body>
+</html>
