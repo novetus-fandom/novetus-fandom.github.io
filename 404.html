@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERROR 404 - Page Not Found</title>
+    <!-- Favicon / Tab Icon --><link rel="icon" type="image/png" href="https://nexucore.github.io/novetus/assets/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 1. Slow/Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 2. Custom Retro Scrollbar (Webkit browsers) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Set a standard retro width */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F0F0; /* Light gray track */
+            border-left: 1px solid #C0C0C0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #A0A0A0; /* Gray thumb */
+            border: 1px solid #777777; /* Dark border for definition */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+        }
+        
+        /* Minimal Retro Aesthetic */
+        body {
+            /* Background Image: New Roblox Stud Texture */
+            background-image: url('https://tr.rbxcdn.com/180DAY-7a08aac3c46b12a65380007ecc18c9f4/420/420/Decal/Webp/noFilter');
+            background-repeat: repeat;
+            background-size: 50px 50px;
+            background-position: center top; 
+            background-color: #50C878; /* Emerald Green base color */
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container - Responsive Width, Centered */
+        #container {
+            max-width: 970px; /* Max fixed width */
+            width: 95%; /* Fluid width for mobile responsiveness */
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        /* Header / Navigation Bar */
+        #header {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-logo {
+            padding-right: 20px;
+        }
+
+        .header-logo img {
+            height: 30px; 
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        #header a {
+            margin-right: 15px;
+            color: #777;
+            font-weight: bold;
+        }
+        
+        /* Error Box Styling */
+        .content-box {
+            background-color: #FFFFFF;
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .box-header {
+            background-color: #DDDDDD;
+            border-bottom: 1px solid #AFAFAF;
+            padding: 5px 10px;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #555555;
+        }
+        
+        .content-padding {
+            padding: 20px;
+        }
+
+        .error-code {
+            font-size: 48pt;
+            color: #CC0000; /* Roblox Red */
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            line-height: 1;
+        }
+        
+        .error-message {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .error-text {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Basic Button Styling */
+        .basic-button {
+            display: inline-block;
+            padding: 8px 16px; /* Slightly adjusted padding */
+            background-color: #0066CC; /* Blue for primary action */
+            color: #FFFFFF;
+            font-size: 10pt;
+            font-weight: bold;
+            border: 1px solid #004488; /* Darker blue border */
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from links acting as buttons */
+            margin: 0 5px; /* Space between buttons */
+            transition: background-color 0.1s;
+        }
+
+        .basic-button.secondary {
+            background-color: #666666; /* Gray for secondary action */
+            border: 1px solid #444444;
+        }
+
+        .basic-button:hover {
+            background-color: #0077EE;
+        }
+        .basic-button.secondary:hover {
+            background-color: #777777;
+        }
+
+        /* Footer with White Frame */
+        #footer {
+            background-color: #FFFFFF; /* White background */
+            border: 1px solid #AFAFAF; /* Frame border */
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            padding: 10px 0; /* Reduced vertical padding */
+            margin-top: 10px; /* Space above footer */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <!-- HEADER / NAVIGATION --><div id="header">
+            <a href="roblox_2011_homepage.html" class="header-logo">
+                 <img src="https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png" alt="NOVETUS Logo">
+            </a>
+            <a href="https://nexucore.github.io/novetus/home/">Home</a>
+            <a href="https://nexucore.github.io/novetus/maps/">Maps</a>
+            <a href="https://bitl.itch.io/novetus">Client Download</a>
+            <a href="https://nexucore.github.io/novetus/info/">Info</a>
+        </div>
+        
+        <!-- MAIN CONTENT AREA (Error Message) --><div id="content-area" style="display: block;">
+
+            <div id="error-pane" class="content-box">
+                <div class="box-header">HTTP 404 - Page Not Found</div>
+                <div class="content-padding">
+                    <p class="error-code">404</p>
+                    <p class="error-message">We couldn't find the page you were looking for.</p>
+                    <p class="error-text">
+                        The URL you entered might be incorrect, or the page may have been moved or removed.
+                        <br>Please use the links below to return to safety.
+                    </p>
+                    
+                    <div class="navigation-links mt-4 space-x-4">
+                        <a href="https://nexucore.github.io/novetus/home/" class="basic-button">
+                            Go To Home Page
+                        </a>
+                        <a href="https://nexucore.github.io/novetus/maps/" target="_blank" class="basic-button secondary">
+                            View Map Archive
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- FOOTER --><div id="footer">
+                This is a fan-made Novetus Map Archive and is not affiliated with or endorsed by the official Novetus creators. &copy; 2024.
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC (Parallax only) --><script>
+        
+        // --- PARALLAX SCROLL LOGIC ---
+        const PARALLAX_FACTOR = 0.3; 
+
+        const handleParallaxScroll = () => {
+            const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+            const newY = -(scrollOffset * PARALLAX_FACTOR); 
+            document.body.style.backgroundPosition = `center ${newY}px`;
+        };
+
+
+        // Initialize everything when the page loads
+        window.onload = function() {
+            handleParallaxScroll(); 
+            window.addEventListener('scroll', handleParallaxScroll);
+        };
+
+    </script>
+</body>
+</html>
