@@ -245,65 +245,6 @@
         }
 
         /* --- MOBILE RESPONSIVENESS FIXES --- */
-        @media (max-width: 600px) {
-            
-            /* Header Layout Fix: Allow wrapping and center content */
-            #header {
-                flex-wrap: wrap; 
-                justify-content: center; /* Center everything */
-                padding: 8px 5px; /* Adjust padding for tight screen */
-            }
-            
-            /* Force Logo/Header Link to take full width and center it */
-            .header-logo {
-                width: 100%; /* Take up a full line */
-                text-align: center;
-                padding-right: 0;
-                margin-bottom: 5px; /* Space before links start */
-            }
-            
-            .header-logo img {
-                 height: 40px; /* Slightly increase logo size for touch target */
-            }
-
-            /* Adjust navigation link spacing for the row below the logo */
-            #header a:not(.header-logo) {
-                margin: 0 5px; /* Reduce horizontal margin */
-                font-size: 9pt;
-            }
-            
-            /* Adjust padding on footer for mobile screens */
-            #footer {
-                padding: 10px 5px;
-            }
-            
-            /* Grid layout centers items automatically on mobile */
-
-            /* Mobile adjustments for form */
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .form-group label {
-                min-width: auto;
-                margin-right: 0;
-                margin-bottom: 2px;
-            }
-
-            .form-group input[type="text"],
-            .form-group select,
-            .form-group input[type="file"] {
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-
-            #submit-suggestion {
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
 
     </style>
 </head>
@@ -311,7 +252,7 @@
 
     <div id="container">
 
-        <!-- HEADER / NAVIGATION --><div id="header">
+        <!-- HEADER / NAVIGATION - Updated with first script's header --><div id="header">
             <a href="https://novetus-fandom.github.io/home/" class="header-logo">
                  <img src="https://img.itch.zone/aW1nLzQ1NDEwOTUucG5n/original/hZZ7X7.png" alt="NOVETUS Logo">
             </a>
